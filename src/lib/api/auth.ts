@@ -1,7 +1,19 @@
 import axios from 'axios'
+import type { Employee, ApiResponse } from '@/lib/types'
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: 'http://localhost:8000',
+})
+
+// Attach token to every request
+api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+  }
+  return config
 })
 
 export type LoginPayload = {
@@ -9,37 +21,23 @@ export type LoginPayload = {
   password: string
 }
 
-export type Employee = {
-  id: string
-  email: string
-  firstName: string
-  lastName: string
-  dailyRate: number | null
-  allowancePerDay: number | null
-  phoneNumber: string
-  address: string
-  identificationId: number
-  role: 'WORKER' | 'LEADER' | 'ADMIN' | 'SUPER_ADMIN'
-  status: 'ACTIVE' | 'INACTIVE' | 'DELETED'
-  avatarUrl: string | null
-  teamId: string | null
-  createdAt: string
-  updatedAt: string
-}
-
 export type LoginResponse = {
   accessToken: string
   employee: Employee
 }
 
-type ApiResponse<T> = {
-  success: boolean
-  data: T
-  path: string
-  timestamp: string
-}
-
 export async function login(payload: LoginPayload): Promise<LoginResponse> {
   const res = await api.post<ApiResponse<LoginResponse>>('/auth/login', payload)
-  return res.data.data
+  const { accessToken, employee } = res.data.data
+
+  // Store token for both middleware (cookie) and axios interceptor (localStorage)
+  localStorage.setItem('token', accessToken)
+  document.cookie = `token=${accessToken}; path=/; max-age=${60 * 60 * 24 * 7}`
+
+  return { accessToken, employee }
+}
+
+export function logout() {
+  localStorage.removeItem('token')
+  document.cookie = 'token=; path=/; max-age=0'
 }

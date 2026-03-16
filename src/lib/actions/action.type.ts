@@ -1,12 +1,13 @@
-type SuccessActionResult<T = unknown> = {
+export type SuccessActionResult<T = unknown> = {
   success: true;
   data?: T;
 };
 
-type ErrorActionResult = {
+export type ErrorActionResult = {
   success: false;
   code?: string;
   message?: string;
+  details?: Record<string, unknown>;
 };
 
 export type ActionResult = SuccessActionResult | ErrorActionResult;

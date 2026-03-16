@@ -1,5 +1,6 @@
 "use client";
 
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -8,6 +9,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { login } from "@/lib/actions/auth-action";
 import { LoginInputForm } from "@/lib/schemas/auth.schema";
 import { Loader } from "lucide-react";
 import { useTransition } from "react";
@@ -26,23 +28,41 @@ export default function LoginForm() {
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = (data: LoginInputForm) => {
-    startTransition(async () => {});
+    startTransition(async () => {
+      const res = await login(data);
+      console.log(res);
+      console.log("Full response:", JSON.stringify(res, null, 2)); // 👈 log everything
+      console.log("Success:", res.success);
+      if (!res.success) {
+        setError("root", {
+          message: "Email or password you entered is incorrected",
+        });
+      }
+    });
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {errors.root && (
+        <Alert variant="destructive" className="mb-4 bg-red-100 border-red-500">
+          <AlertTitle>{errors.root.message}</AlertTitle>
+        </Alert>
+      )}
       <FieldGroup>
         <Controller
           control={control}
           name="email"
           render={({ field, fieldState }) => (
             <Field aria-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+              <FieldLabel className="text-white" htmlFor={field.name}>
+                Email
+              </FieldLabel>
               <Input
                 {...field}
                 id={field.name}
                 placeholder="Email"
                 aria-invalid={fieldState.invalid}
+                className="bg-gray-100 focus:bg-white transition-colors"
               />
               {fieldState.invalid && (
                 <FieldError errors={[fieldState.error]}></FieldError>
@@ -56,12 +76,15 @@ export default function LoginForm() {
           name="password"
           render={({ field, fieldState }) => (
             <Field aria-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+              <FieldLabel className="text-white" htmlFor={field.name}>
+                Password
+              </FieldLabel>
               <Input
                 {...field}
                 id={field.name}
                 placeholder="password"
                 aria-invalid={fieldState.invalid}
+                className="bg-gray-100 focus:bg-white transition-colors"
               />
               {fieldState.invalid && (
                 <FieldError errors={[fieldState.error]}></FieldError>

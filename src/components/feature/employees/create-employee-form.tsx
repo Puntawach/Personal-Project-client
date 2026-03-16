@@ -10,7 +10,6 @@ import {
   createEmployeeSchema,
   type CreateEmployeeInput,
 } from "@/lib/schemas/employee.schema";
-import { createEmployee } from "@/lib/api/employee";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

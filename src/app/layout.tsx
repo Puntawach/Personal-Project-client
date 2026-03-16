@@ -1,15 +1,22 @@
-import '@/styles/globals.css'
-import { Geist } from 'next/font/google'
-import { cn } from '@/lib/utils'
+import "@/styles/globals.css";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/lib/auth/auth";
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await auth();
   return (
-    <html lang="en" className={cn('font-sans', geist.variable)}>
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className="antialiased">
-        {children}
+        <SessionProvider session={session}>{children}</SessionProvider>
       </body>
     </html>
-  )
+  );
 }

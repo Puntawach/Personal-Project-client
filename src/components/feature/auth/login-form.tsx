@@ -31,7 +31,6 @@ export default function LoginForm() {
     startTransition(async () => {
       const res = await login(data);
       console.log(res);
-      console.log("Full response:", JSON.stringify(res, null, 2)); // 👈 log everything
       console.log("Success:", res.success);
       if (!res.success) {
         setError("root", {

@@ -16,3 +16,4 @@ export const updateEmployee = async (
     return { success: false, code: "UPDATE_FAILED" };
   }
 };
+//<{ dailyRate: number; allowancePerDay: number }>,

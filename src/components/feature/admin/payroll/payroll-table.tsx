@@ -17,17 +17,17 @@ import type { Team } from "@/lib/api/admin/team.type";
 import PayrollRateWarning from "./payroll-rate-warning";
 
 type Props = {
-  initialSummary: PayrollSummary | null;
+  summary: PayrollSummary | null;
   teams: Team[];
-  initialMonth: number;
-  initialYear: number;
+  month: number;
+  year: number;
 };
 
 export default function PayrollTable({
-  initialSummary,
+  summary: initialSummary,
   teams,
-  initialMonth,
-  initialYear,
+  month: initialMonth,
+  year: initialYear,
 }: Props) {
   const [month, setMonth] = useState(initialMonth);
   const [year, setYear] = useState(initialYear);

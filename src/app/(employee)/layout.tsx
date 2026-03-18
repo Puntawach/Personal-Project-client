@@ -7,7 +7,7 @@ export default function EmployeeLayout({
 }) {
   return (
     <div className="min-h-screen bg-gray-300 md:flex md:items-start md:justify-center">
-      <div className="relative w-full md:max-w-[430px] min-h-screen bg-gray-50 md:min-h-screen">
+      <div className="relative w-full md:max-w-107.5 min-h-screen bg-gray-50 md:min-h-screen">
         <main className="p-4 pb-24">{children}</main>
         <EmployeeSidebar />
       </div>

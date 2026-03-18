@@ -15,12 +15,7 @@ export function Navbar() {
     setIsScrolled(latest > 50);
   });
 
-  const navLinks = [
-    { name: "Features", href: "#features" },
-    //   { name: "Pricing", href: "#pricing" },
-    //   { name: "About", href: "#about" },
-    //   { name: "Contact", href: "#contact" },
-  ];
+  const navLinks = [{ name: "other", href: "#" }];
 
   return (
     <motion.nav
@@ -56,20 +51,21 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-          <button className="bg-white text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors">
-            Get Started
-          </button>
+          <Link href="/login">
+            <button className="bg-white text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors">
+              Login
+            </button>
+          </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile ==>Toggle */}
         <button
           className="md:hidden relative z-50 text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
-
-        {/* Mobile Menu Overlay */}
+        {/* Mobile ==> Overlay */}
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}

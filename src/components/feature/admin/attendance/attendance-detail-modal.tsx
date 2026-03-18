@@ -1,13 +1,13 @@
 // components/features/attendance/attendance-detail-modal.tsx
 "use client";
 
-import { useState, useTransition } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, XCircle, Clock, Loader } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { AttendanceWithEmployee } from "@/lib/api/attendance/attendance.type";
+import { Button } from "@/components/ui/button";
 import { approve, reject } from "@/lib/actions/admin/attendance.action";
+import type { AttendanceWithEmployee } from "@/lib/api/attendance/attendance.type";
+import { AnimatePresence, motion } from "framer-motion";
+import { CheckCircle2, Clock, Loader, X, XCircle } from "lucide-react";
+import { useTransition } from "react";
 
 type Props = {
   attendance: AttendanceWithEmployee | null;
@@ -40,7 +40,6 @@ export default function AttendanceDetailModal({
   function handleApprove() {
     startTransition(async () => {
       const res = await approve(attendance!.id);
-      console.log("approve result:", res); // ← เพิ่ม log
       if (res.success) {
         onAction();
         onClose();
@@ -51,7 +50,6 @@ export default function AttendanceDetailModal({
   function handleReject() {
     startTransition(async () => {
       const res = await reject(attendance!.id);
-      console.log("reject result:", res); // ← เพิ่ม log
       if (res.success) {
         onAction();
         onClose();

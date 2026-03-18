@@ -5,19 +5,20 @@ export type Role = "WORKER" | "LEADER" | "ADMIN" | "SUPER_ADMIN";
 export type Employee = {
   id: string;
   email: string;
+  password: string;
   firstName: string;
   lastName: string;
-  dailyRate: number;
-  allowancePerDay: number;
   phoneNumber: string;
   address: string;
-  identificationId: number;
-  role: Role;
-  status: Status;
-  avatarUrl: string | null;
+  identificationId: string;
+  role: "WORKER" | "LEADER" | "ADMIN" | "SUPER_ADMIN";
+  status: "ACTIVE" | "INACTIVE" | "DELETE";
+  avatarUrl?: string | null;
+  dailyRate?: number | null;
+  allowancePerDay?: number | null;
   createdAt: string;
   updatedAt: string;
-  teamId: string;
+  teamId?: string | null;
 };
 
 export type UpdateMeInput = {

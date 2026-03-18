@@ -22,11 +22,6 @@ export default async function PayrollPage() {
   }
 
   return (
-    <PayrollTable
-      initialSummary={summary}
-      teams={teams}
-      initialMonth={month}
-      initialYear={year}
-    />
+    <PayrollTable summary={summary} teams={teams} month={month} year={year} />
   );
 }

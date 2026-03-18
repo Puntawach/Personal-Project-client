@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function PayrollRateWarning({ payrollItems }: Props) {
-  // [LOGIC] compare current rate vs snapshot
+  // compare current rate vs snapshot
   const changedEmployees = payrollItems.filter((item) => {
     const rateChanged =
       Number(item.employee.dailyRate) !== Number(item.dailyRateSnapshot);

@@ -26,7 +26,7 @@ export function Hero() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
             <span className="text-xs font-medium text-white/80 uppercase tracking-wider">
-              Trusted by leading enterprises
+              Devnest Personal Project
             </span>
           </div>
         </motion.div>
@@ -46,11 +46,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed"
-        >
-          Streamline your workforce operations with precision. Automate
-          attendance tracking, simplify payroll processing, and ensure
-          compliance — all in one platform.
-        </motion.p>
+        ></motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -63,14 +59,11 @@ export function Hero() {
             className="group relative px-8 py-4 bg-white text-black rounded-full font-semibold text-lg overflow-hidden transition-all hover:scale-105"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Get Started{" "}
+              Login{" "}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-linear-to-r from-blue-100 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
-          <button className="px-8 py-4 glass rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-all hover:scale-105">
-            Contact us
-          </button>
         </motion.div>
       </div>
 

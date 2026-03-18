@@ -26,7 +26,6 @@ export default function ProfileAvatar({ employee }: Props) {
           <AvatarFallback className="text-2xl">{initials}</AvatarFallback>
         </Avatar>
 
-        {/* ✅ ใช้ ImageUploadDialog เหมือน original */}
         <ImageUploadDialog
           trigger={
             <Button

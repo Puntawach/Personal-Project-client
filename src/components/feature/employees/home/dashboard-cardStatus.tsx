@@ -5,8 +5,8 @@ import { Briefcase, MapPin } from "lucide-react";
 const mockToday = {
   isCheckedIn: false,
   checkInTime: null,
-  site: "Downtown Mall Project",
-  team: "Alpha Squad",
+  site: "AAAA",
+  team: "AAA",
   workedHours: 0,
 };
 
@@ -15,8 +15,7 @@ type Props = {
 };
 
 export default function DashboardCardStatus({ employee }: Props) {
-  // [API] GET /attendance/me → filter today
-  // [API] GET /attendance/me → last 3 for recent list
+  // [API] GET /attendance/me
   const today = mockToday;
   return (
     <div className="bg-slate-900 rounded-2xl p-5 text-white space-y-4">

@@ -67,11 +67,11 @@ export default function PayrollRow({
         </td>
       </tr>
 
-      {/* ── Expanded Detail ───────────────────────────────────────────────── */}
+      {/* ── Expanded Detail ─────── */}
       {isExpanded && (
-        <tr key={`${item.id}-detail`} className="bg-white/[0.02]">
+        <tr key={`${item.id}-detail`} className="bg-white/2 ">
           <td colSpan={7} className="px-6 py-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl ">
               {/* Breakdown */}
               <div className="space-y-2">
                 <p className="text-xs font-bold uppercase text-white/30 mb-3">

@@ -55,7 +55,7 @@ export default function EmployeeRow({ employee, team, onSelect }: Props) {
             onSelect(employee.id);
           }}
         >
-          <Edit2 size={16} />
+          <Edit2 className="text-white" size={16} />
         </Button>
       </td>
     </tr>

@@ -69,7 +69,6 @@ export default function DashboardContent({ employee }: Props) {
     <div className="max-w-lg mx-auto space-y-4">
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <DashboardHeader employee={employee} />
-
       {/* ── Today Status Card ─────────────────────────────────────────────── */}
       <DashboardCardStatus employee={employee} />
       {/* ── Quick Actions ─────────────────────────────────────────────────── */}

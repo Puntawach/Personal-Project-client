@@ -1,8 +1,9 @@
+"use client";
+
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import EmployeeRow from "./employee-row";
-import type { Employee } from "@/lib/api/employee/employee.type";
-import type { Team } from "@/lib/api/admin/team.type";
+import { Employee } from "@/lib/api/employee/employee.type";
+import { Team } from "@/lib/api/admin/team.type";
 
 type Props = {
   employees: Employee[];
@@ -25,17 +26,17 @@ export default function EmployeeTable({
   return (
     <div className="rounded-xl border border-white/10 overflow-hidden bg-white/5">
       {/* Search */}
-      <div className="p-4 border-b border-white/10">
-        <div className="relative max-w-md">
+      <div className="p-4 border-b border-white/10 flex gap-3">
+        <div className="relative flex-1 max-w-md">
           <Search
             className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
             size={16}
           />
-          <Input
-            placeholder="Search employee..."
-            className="pl-9 bg-white/5 border-white/10 text-white"
+          <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search employee..."
+            className="w-full pl-9 pr-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg text-sm placeholder:text-white/30 focus:outline-none focus:border-blue-500"
           />
         </div>
       </div>
@@ -51,23 +52,22 @@ export default function EmployeeTable({
             <th className="px-6 py-4 text-right">Action</th>
           </tr>
         </thead>
-
-        <tbody>
-          {employees.map((emp) => (
-            <EmployeeRow
-              key={emp.id}
-              employee={emp}
-              team={getTeam(emp.teamId)}
-              onSelect={onSelect}
-            />
-          ))}
-
-          {employees.length === 0 && (
+        <tbody className="divide-y divide-white/5">
+          {employees.length === 0 ? (
             <tr>
-              <td colSpan={5} className="text-center py-10 text-white/30">
+              <td colSpan={5} className="py-12 text-center text-white/30">
                 No employees found
               </td>
             </tr>
+          ) : (
+            employees.map((el) => (
+              <EmployeeRow
+                key={el.id}
+                employee={el}
+                team={getTeam(el.teamId ?? null)}
+                onSelect={onSelect}
+              />
+            ))
           )}
         </tbody>
       </table>

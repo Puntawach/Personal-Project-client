@@ -15,8 +15,7 @@ type Props = {
 };
 
 export default function DashboardActions({ employee }: Props) {
-  // [API] GET /attendance/me → filter today
-  // [API] GET /attendance/me → last 3 for recent list
+  // [API] GET /attendance/me
   const today = mockToday;
   return (
     <div className="grid grid-cols-2 gap-3">

@@ -58,6 +58,19 @@ export default function EmployeeRow({ employee, team, onSelect }: Props) {
           <Edit2 className="text-white" size={16} />
         </Button>
       </td>
+
+      <td className="px-6 py-4 text-right">
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect(employee.id);
+          }}
+        >
+          <Edit2 className="text-white" size={16} />
+        </Button>
+      </td>
     </tr>
   );
 }

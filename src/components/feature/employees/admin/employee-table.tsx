@@ -50,6 +50,7 @@ export default function EmployeeTable({
             <th className="px-6 py-4">Team</th>
             <th className="px-6 py-4">Status</th>
             <th className="px-6 py-4 text-right">Action</th>
+            <th className="px-6 py-4 text-right">Delete</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5">

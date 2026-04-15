@@ -2,7 +2,7 @@
 import { getCurrentUser } from "@/lib/auth/session";
 import { teamService } from "@/lib/api/admin/team.service";
 import AttendanceTable from "@/components/feature/admin/attendance/attendance-table";
-import { attendanceService } from "@/lib/api/attendance/attendance-service";
+import { attendanceService } from "@/lib/api/attendance/attendance.service";
 
 export default async function AttendancePage() {
   await getCurrentUser();

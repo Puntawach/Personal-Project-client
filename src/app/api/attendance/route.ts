@@ -1,5 +1,5 @@
 // app/api/attendance/route.ts
-import { attendanceService } from "@/lib/api/attendance/attendance-service";
+import { attendanceService } from "@/lib/api/attendance/attendance.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

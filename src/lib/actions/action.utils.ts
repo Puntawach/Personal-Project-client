@@ -5,7 +5,6 @@ export const formatActionError = (error: unknown): ErrorActionResult => {
   if (error instanceof ApiError) {
     return { success: false, ...error };
   }
-
   return {
     success: false,
     message: "Internal server error",

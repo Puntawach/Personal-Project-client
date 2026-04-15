@@ -1,27 +1,17 @@
 // dashboard-content.tsx
-"use client"; // ← ถ้าต้องการ state
+"use client";
 
 type Props = {
   employee: Employee;
 };
-import { cn } from "@/lib/utils";
-import {
-  Briefcase,
-  CalendarDays,
-  CheckCircle2,
-  ChevronRight,
-  Clock,
-  FileText,
-  LogIn,
-  MapPin,
-  User,
-} from "lucide-react";
-import Link from "next/link";
-import DashboardHeader from "./dashboard-header";
 import { Employee } from "@/lib/types";
-import DashboardCardStatus from "./dashboard-cardStatus";
-import DashboardUpdate from "./dashboard-update";
+import { cn } from "@/lib/utils";
+import { CheckCircle2, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import DashboardActions from "./dashboard-action";
+import DashboardCardStatus from "./dashboard-cardStatus";
+import DashboardHeader from "./dashboard-header";
+import DashboardUpdate from "./dashboard-update";
 
 const mockRecentAttendance = [
   {

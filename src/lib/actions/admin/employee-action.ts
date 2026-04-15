@@ -2,7 +2,8 @@
 
 import { employeeService } from "@/lib/api/employee/employee-service";
 import { revalidatePath } from "next/cache";
-import { ActionResult } from "../action.type";
+import { formatActionError } from "../action.utils";
+import type { ActionResult } from "../action.type";
 
 export const updateEmployee = async (
   id: string,
@@ -12,8 +13,7 @@ export const updateEmployee = async (
     await employeeService.update(id, data);
     revalidatePath("/admin/employees");
     return { success: true };
-  } catch {
-    return { success: false, code: "UPDATE_FAILED" };
+  } catch (error) {
+    return formatActionError(error);
   }
 };
-//<{ dailyRate: number; allowancePerDay: number }>,

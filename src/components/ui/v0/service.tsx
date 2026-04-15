@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Code2, Palette, Rocket, Smartphone } from "lucide-react";
+import { GlassCard } from "../glassCard";
 
 const services = [
   {

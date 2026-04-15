@@ -10,15 +10,15 @@ export type Employee = {
   lastName: string;
   phoneNumber: string;
   address: string;
-  identificationId: string;
+  identificationId: number;
   role: "WORKER" | "LEADER" | "ADMIN" | "SUPER_ADMIN";
   status: "ACTIVE" | "INACTIVE" | "DELETE";
-  avatarUrl?: string | null;
-  dailyRate?: number | null;
-  allowancePerDay?: number | null;
+  avatarUrl: string | null;
+  dailyRate: number;
+  allowancePerDay: number | null;
   createdAt: string;
   updatedAt: string;
-  teamId?: string | null;
+  teamId: string | null;
 };
 
 export type UpdateMeInput = {

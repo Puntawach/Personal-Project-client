@@ -12,7 +12,7 @@ export type Employee = {
   email: string;
   firstName: string;
   lastName: string;
-  dailyRate: number | null;
+  dailyRate: number;
   allowancePerDay: number | null;
   phoneNumber: string;
   address: string;

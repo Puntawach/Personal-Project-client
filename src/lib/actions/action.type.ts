@@ -10,4 +10,6 @@ export type ErrorActionResult = {
   details?: Record<string, unknown>;
 };
 
-export type ActionResult = SuccessActionResult | ErrorActionResult;
+export type ActionResult<T = unknown> =
+  | SuccessActionResult<T>
+  | ErrorActionResult;

@@ -62,15 +62,9 @@ export default function CheckInForm({ sites, todayAttendance }: Props) {
     setError(null);
 
     startTransition(async () => {
-      const now = new Date();
-      const offset = now.getTimezoneOffset() * -1;
-      const local = new Date(now.getTime() + offset * 60 * 1000);
-      const workDate = local.toISOString().split("T")[0];
-
       const result = await checkInAction(
         selectedSite,
-        workDate,
-        now.toISOString(),
+        new Date().toISOString(), // checkInTime เท่านั้น
       );
 
       if (result.success) {

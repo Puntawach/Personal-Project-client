@@ -1,15 +1,15 @@
-// app/(employee)/profile/page.tsx
 import ProfileHeader from "@/components/feature/employees/profile/profile-header";
-import { employeeService } from "@/lib/api/employee/employee-service";
-import { getCurrentUser } from "@/lib/auth/session";
+import { getMeAction } from "@/lib/actions/employee/employee-action";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
-  await getCurrentUser();
-  const employee = await employeeService.getMe();
+  const result = await getMeAction();
+
+  if (!result.success || !result.data) redirect("/login");
 
   return (
     <div>
-      <ProfileHeader employee={employee} />
+      <ProfileHeader employee={result.data} />
     </div>
   );
 }

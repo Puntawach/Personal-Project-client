@@ -1,9 +1,7 @@
-// lib/api/payroll/payroll.type.ts
 export type PayrollPeriod = {
   id: string;
   month: number;
   year: number;
-  isLocked: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -21,6 +19,7 @@ export type PayrollItem = {
   allowanceSnapshot: string | null;
   employeeId: string;
   payrollPeriodId: string;
+  updatedAt: string;
   employee: {
     id: string;
     firstName: string;
@@ -33,8 +32,6 @@ export type PayrollItem = {
 };
 
 export type PayrollSummary = {
-  period: PayrollPeriod & {
-    payrollItems: PayrollItem[];
-  };
+  period: PayrollPeriod & { payrollItems: PayrollItem[] };
   totalPayout: number;
 };

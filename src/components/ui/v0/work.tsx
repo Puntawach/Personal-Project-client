@@ -77,7 +77,7 @@ export function Work() {
                     className={`p-12 flex flex-col justify-center relative overflow-hidden`}
                   >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+                      className={`absolute inset-0 bg-linear-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
                     />
                     <div className="relative z-10">
                       <span className="text-sm font-medium text-white/50 mb-4 block uppercase tracking-wider">
@@ -100,7 +100,7 @@ export function Work() {
                       </div>
                     </div>
                   </div>
-                  <div className="relative h-[400px] md:h-auto overflow-hidden">
+                  <div className="relative h-100 md:h-auto overflow-hidden">
                     <Image
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}

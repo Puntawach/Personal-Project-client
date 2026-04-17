@@ -1,37 +1,51 @@
-import { Employee } from "@/lib/types";
+import { Attendance } from "@/lib/types";
 import { Clock, FileText } from "lucide-react";
 import Link from "next/link";
-const mockUpdates = [
-  {
-    id: "1",
-    type: "report",
-    title: "Daily Report Missing",
-    desc: "Please submit your EOD report.",
-    action: "Submit",
-    href: "/reports/create",
-  },
-  {
-    id: "2",
-    type: "shift",
-    title: "Shift Not Started",
-    desc: "You haven't checked in yet.",
-    action: "Check In",
-    href: "/attendance",
-  },
-];
 
 type Props = {
-  employee: Employee;
+  todayAttendance: Attendance | null;
 };
 
-export default function DashboardUpdate({ employee }: Props) {
+export default function DashboardUpdate({ todayAttendance }: Props) {
+  const isCheckedIn = !!todayAttendance;
+  const isCheckedOut = !!todayAttendance?.checkIns?.[0]?.checkOutTime;
+
+  const updates = [
+    ...(!isCheckedIn
+      ? [
+          {
+            id: "shift",
+            type: "shift",
+            title: "Shift Not Started",
+            desc: "You haven't checked in yet.",
+            action: "Check In",
+            href: "/attendance/check-in",
+          },
+        ]
+      : []),
+    ...(isCheckedIn && !isCheckedOut
+      ? [
+          {
+            id: "checkout",
+            type: "shift",
+            title: "Shift In Progress",
+            desc: "Remember to check out when done.",
+            action: "Check Out",
+            href: "/attendance/check-out",
+          },
+        ]
+      : []),
+  ];
+
+  if (updates.length === 0) return null;
+
   return (
     <div className="space-y-2">
       <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
         Todays Updates
       </h2>
       <div className="space-y-2">
-        {mockUpdates.map((update) => (
+        {updates.map((update) => (
           <div
             key={update.id}
             className="bg-white rounded-xl px-4 py-3 flex items-center justify-between border border-gray-100"

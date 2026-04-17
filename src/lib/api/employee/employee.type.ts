@@ -1,18 +1,16 @@
-export type Status = "ACTIVE" | "INACTIVE" | "DELETED";
-
+export type EmployeeStatus = "ACTIVE" | "INACTIVE" | "DELETED";
 export type Role = "WORKER" | "LEADER" | "ADMIN" | "SUPER_ADMIN";
 
 export type Employee = {
   id: string;
   email: string;
-  password: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
   address: string;
   identificationId: number;
-  role: "WORKER" | "LEADER" | "ADMIN" | "SUPER_ADMIN";
-  status: "ACTIVE" | "INACTIVE" | "DELETE";
+  role: Role;
+  status: EmployeeStatus;
   avatarUrl: string | null;
   dailyRate: number;
   allowancePerDay: number | null;

@@ -1,25 +1,18 @@
-// app/admin/payroll/page.tsx
-import { getCurrentUser } from "@/lib/auth/session";
 import { teamService } from "@/lib/api/admin/team.service";
-import { payrollService } from "@/lib/api/payroll/payroll-service";
+import { getPayrollSummaryAction } from "@/lib/actions/admin/payroll-action";
 import PayrollTable from "@/components/feature/admin/payroll/payroll-table";
 
 export default async function PayrollPage() {
-  await getCurrentUser();
-
   const now = new Date();
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
 
-  const [teams] = await Promise.all([teamService.getAll()]);
+  const [teams, summaryResult] = await Promise.all([
+    teamService.getAll(),
+    getPayrollSummaryAction(month, year),
+  ]);
 
-  // [NOTE] payroll summary อาจไม่มีถ้ายังไม่ generate
-  let summary = null;
-  try {
-    summary = await payrollService.getSummary(month, year);
-  } catch {
-    summary = null;
-  }
+  const summary = summaryResult.success ? (summaryResult.data ?? null) : null;
 
   return (
     <PayrollTable summary={summary} teams={teams} month={month} year={year} />

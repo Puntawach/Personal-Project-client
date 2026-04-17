@@ -77,10 +77,6 @@ export function EmployeeStatusBadge({ status }: { status: EmployeeStatus }) {
       label: "Deleted",
       className: "bg-red-100 text-red-700 border-red-200",
     },
-    DELETE: {
-      label: "Delete",
-      className: "bg-red-100 text-red-700 border-red-200",
-    },
   };
   const { label, className } = map[status];
   return (

@@ -2,19 +2,19 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Loader, RefreshCw } from "lucide-react";
+import { Clock, Loader, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PayrollHeader from "./payroll-header";
 import PayrollInfoBanner from "./payroll-info-banner";
 import PayrollControls from "./payroll-controls";
 import PayrollRow from "./payroll-row";
-import {
-  generatePayroll,
-  lockPayroll,
-} from "@/lib/actions/admin/payroll-action";
 import type { PayrollSummary } from "@/lib/api/payroll/payroll-type";
 import type { Team } from "@/lib/api/admin/team.type";
 import PayrollRateWarning from "./payroll-rate-warning";
+import {
+  generatePayroll,
+  getPayrollSummaryAction,
+} from "@/lib/actions/admin/payroll-action";
 
 type Props = {
   summary: PayrollSummary | null;
@@ -22,7 +22,6 @@ type Props = {
   month: number;
   year: number;
 };
-
 export default function PayrollTable({
   summary: initialSummary,
   teams,
@@ -38,16 +37,8 @@ export default function PayrollTable({
 
   // [API] fetch summary when month changes
   async function fetchSummary(m: number, y: number) {
-    try {
-      const res = await fetch(`/api/payroll/summary?month=${m}&year=${y}`);
-      if (!res.ok) {
-        setSummary(null);
-        return;
-      }
-      setSummary(await res.json());
-    } catch {
-      setSummary(null);
-    }
+    const result = await getPayrollSummaryAction(m, y);
+    setSummary(result.success ? (result.data ?? null) : null);
   }
 
   function handleMonthChange(value: string) {
@@ -64,13 +55,6 @@ export default function PayrollTable({
     });
   }
 
-  function handleLock() {
-    startTransition(async () => {
-      const res = await lockPayroll(month, year);
-      if (res.success) await fetchSummary(month, year);
-    });
-  }
-
   // [LOGIC] filter by team
   const payrollItems = summary?.period.payrollItems ?? [];
   const filtered =
@@ -78,7 +62,6 @@ export default function PayrollTable({
       ? payrollItems
       : payrollItems.filter((item) => item.employee.teamId === selectedTeamId);
 
-  const isLocked = summary?.period.isLocked ?? false;
   const monthStr = `${year}-${String(month).padStart(2, "0")}`;
 
   const getTeamName = (teamId: string | null) =>
@@ -87,15 +70,13 @@ export default function PayrollTable({
   return (
     <div className="space-y-6">
       <PayrollHeader
-        isLocked={isLocked}
         hasSummary={!!summary}
         isPending={isPending}
         onGenerate={handleGenerate}
-        onLock={handleLock}
       />
 
       <PayrollInfoBanner />
-      {summary && !isLocked && (
+      {summary && (
         <PayrollRateWarning payrollItems={summary.period.payrollItems} />
       )}
       <PayrollControls
@@ -170,6 +151,22 @@ export default function PayrollTable({
               </tbody>
             </table>
           </div>
+        </div>
+      )}
+      {/* Last updated */}
+      {summary && (
+        <div className="flex items-center gap-1.5 text-xs text-white/30">
+          <Clock size={11} />
+          <span>
+            อัพเดทล่าสุด{" "}
+            {new Date(summary.period.updatedAt).toLocaleDateString("th-TH", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
         </div>
       )}
     </div>

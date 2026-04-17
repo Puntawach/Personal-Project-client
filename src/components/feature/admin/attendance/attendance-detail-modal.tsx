@@ -211,7 +211,6 @@ export default function AttendanceDetailModal({
                 variant="outline"
                 className="flex-1 gap-2 border-red-500/30 text-red-400 hover:bg-red-500/10"
                 onClick={() => {
-                  console.log("reject clicked", attendance.id); // ← log
                   handleReject(); // ← ต้องเป็น handleReject ไม่ใช่ handleApprove
                 }}
                 disabled={isPending}
@@ -229,7 +228,6 @@ export default function AttendanceDetailModal({
                 <Button
                   className="flex-1 gap-2 bg-green-600 hover:bg-green-700"
                   onClick={() => {
-                    console.log("approve clicked", attendance.id); // ← log
                     handleApprove();
                   }}
                   disabled={isPending}

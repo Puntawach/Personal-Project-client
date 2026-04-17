@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { LogIn, LogOut, Clock, MapPin } from "lucide-react";
 import type { Attendance } from "@/lib/types";
+import { Clock, LogIn, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Props = {
   todayAttendance: Attendance | null;
@@ -147,7 +147,7 @@ export default function AttendanceTodayCard({ todayAttendance }: Props) {
           {!isCheckedIn ? (
             <button
               onClick={() => router.push("/attendance/check-in")}
-              className="w-36 h-36 rounded-full bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-xl shadow-blue-200 flex flex-col items-center justify-center gap-2 ring-8 ring-blue-50 ring-offset-2 active:scale-95 transition-transform"
+              className="w-36 h-36 rounded-full bg-linear-to-b from-blue-500 to-blue-700 text-white shadow-xl shadow-blue-200 flex flex-col items-center justify-center gap-2 ring-8 ring-blue-50 ring-offset-2 active:scale-95 transition-transform"
             >
               <LogIn size={28} />
               <span className="text-base font-bold">เข้างาน</span>
@@ -155,7 +155,7 @@ export default function AttendanceTodayCard({ todayAttendance }: Props) {
           ) : (
             <button
               onClick={() => router.push("/attendance/check-out")}
-              className="w-36 h-36 rounded-full bg-gradient-to-b from-orange-500 to-red-600 text-white shadow-xl shadow-red-200 flex flex-col items-center justify-center gap-2 ring-8 ring-orange-50 ring-offset-2 active:scale-95 transition-transform"
+              className="w-36 h-36 rounded-full bg-linear-to-b from-orange-500 to-red-600 text-white shadow-xl shadow-red-200 flex flex-col items-center justify-center gap-2 ring-8 ring-orange-50 ring-offset-2 active:scale-95 transition-transform"
             >
               <LogOut size={28} />
               <span className="text-base font-bold">ออกงาน</span>

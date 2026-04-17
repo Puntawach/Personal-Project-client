@@ -32,7 +32,7 @@ export const login = async (input: LoginInputForm): Promise<ActionResult> => {
   const role = session?.user?.role ?? "WORKER";
   const isAdmin = ADMIN_ROLES.includes(role);
 
-  redirect(isAdmin ? "/admin" : "/home");
+  redirect(isAdmin ? "/admin" : "/dashboard");
 };
 export const logout = async () => {
   await signOut({ redirectTo: "/login" });

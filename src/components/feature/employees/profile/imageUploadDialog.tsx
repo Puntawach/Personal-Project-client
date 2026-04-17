@@ -118,7 +118,6 @@ export default function ImageUploadDialog({
         className="hidden"
         ref={fileInputEl}
         onChange={(e) => {
-          console.log(e.target.files);
           if (e.target.files) {
             setFile(e.target.files[0]);
           }

@@ -58,7 +58,6 @@ export default function CreateEmployeeForm() {
         setError("email", { message: res.message });
       }
     });
-    console.log("data", data);
   };
 
   return (
@@ -77,12 +76,7 @@ export default function CreateEmployeeForm() {
         </Alert>
       )}
 
-      <form
-        onClick={() => console.log("form clicked")}
-        onSubmit={handleSubmit(onSubmit, (errors) =>
-          console.log("validation errors:", errors),
-        )}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">
           {/* ── Personal Info ─────────────────────────────────────────────── */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6">

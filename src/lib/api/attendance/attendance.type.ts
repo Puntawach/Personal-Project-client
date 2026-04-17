@@ -1,4 +1,3 @@
-// lib/api/attendance/attendance.type.ts
 export type AttendanceStatus =
   | "WORKING"
   | "SUBMITTED"
@@ -27,6 +26,12 @@ export type AttendanceWithEmployee = {
   checkIns: CheckIn[];
   createdAt: string;
   updatedAt: string;
+  site: {
+    id: string;
+    name: string;
+    lat: number;
+    long: number;
+  };
   employee: {
     id: string;
     firstName: string;

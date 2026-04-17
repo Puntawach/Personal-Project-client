@@ -1,5 +1,11 @@
-export type Role = "WORKER" | "LEADER" | "ADMIN" | "SUPER_ADMIN";
-export type EmployeeStatus = "ACTIVE" | "INACTIVE" | "DELETED" | "DELETE";
+import { Employee } from "@/lib/api/employee/employee.type";
+
+export type {
+  Employee,
+  EmployeeStatus,
+  Role,
+} from "@/lib/api/employee/employee.type";
+
 export type AttendanceStatus =
   | "WORKING"
   | "SUBMITTED"
@@ -7,29 +13,18 @@ export type AttendanceStatus =
   | "REJECTED";
 export type ReportStatus = "PENDING" | "APPROVED" | "REJECTED";
 
-export type Employee = {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  dailyRate: number;
-  allowancePerDay: number | null;
-  phoneNumber: string;
-  address: string;
-  identificationId: number;
-  role: Role;
-  status: EmployeeStatus;
-  avatarUrl: string | null;
-  teamId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type CheckIn = {
   id: string;
   checkInTime: string;
   checkOutTime: string | null;
   attendanceId: string;
+};
+
+export type Site = {
+  id: string;
+  name: string;
+  lat: number;
+  long: number;
 };
 
 export type Attendance = {
@@ -43,6 +38,7 @@ export type Attendance = {
   status: AttendanceStatus;
   employeeId: string;
   siteId: string;
+  site?: Site;
   checkIns: CheckIn[];
 };
 
@@ -82,13 +78,6 @@ export type Team = {
   leaderId: string | null;
   leader: Employee | null;
   employees: Employee[];
-};
-
-export type Site = {
-  id: string;
-  name: string;
-  lat: number;
-  long: number;
 };
 
 export type ApiResponse<T> = {

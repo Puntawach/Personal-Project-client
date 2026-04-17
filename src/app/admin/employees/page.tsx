@@ -1,12 +1,15 @@
-// app/admin/employees/page.tsx
 import EmployeeList from "@/components/feature/employees/admin/employee-list";
-import { teamService } from "@/lib/api/admin/team.service";
-import { employeeService } from "@/lib/api/employee/employee-service";
-
+import { getAllEmployeesAction } from "@/lib/actions/admin/employee-action";
+import { getTeamsAction } from "@/lib/actions/admin/team.action";
 
 export default async function EmployeesPage() {
-  const employees = await employeeService.getAllEmployee();
-  const teams = await teamService.getAll();
+  const [employeesResult, teamsResult] = await Promise.all([
+    getAllEmployeesAction(),
+    getTeamsAction(),
+  ]);
+
+  const employees = employeesResult.success ? (employeesResult.data ?? []) : [];
+  const teams = teamsResult.success ? (teamsResult.data ?? []) : [];
 
   return <EmployeeList employees={employees} teams={teams} />;
 }

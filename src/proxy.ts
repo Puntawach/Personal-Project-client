@@ -7,6 +7,7 @@ const adminRoutes = ["/admin"];
 const employeeRoutes = [
   "/home",
   "/attendance",
+  "/dashboard",
   "/reports",
   "/profile",
   "/payroll",

@@ -30,8 +30,6 @@ export default function LoginForm() {
   const onSubmit = (data: LoginInputForm) => {
     startTransition(async () => {
       const res = await login(data);
-      console.log(res);
-      console.log("Success:", res.success);
       if (!res.success) {
         setError("root", {
           message: "Email or password you entered is incorrected",
